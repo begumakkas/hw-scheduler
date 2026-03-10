@@ -10,9 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_13_202311) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_10_200735) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.string "location"
+    t.time "meeting_time"
+    t.string "instructor_name"
+    t.string "instructor_email"
+    t.string "color"
+    t.date "meeting_days"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "policies", force: :cascade do |t|
+    t.integer "course_id"
+    t.string "policy_text"
+    t.string "policy_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "solid_cable_messages", force: :cascade do |t|
     t.binary "channel", null: false
@@ -154,6 +175,44 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_13_202311) do
     t.index ["expires_at"], name: "index_solid_queue_semaphores_on_expires_at"
     t.index ["key", "value"], name: "index_solid_queue_semaphores_on_key_and_value"
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
+  end
+
+  create_table "syllabis", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "course_id"
+    t.string "file_name"
+    t.string "raw_extracted_json"
+    t.string "file_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "exam_flag"
+    t.date "due_date"
+    t.integer "optional_flag"
+    t.integer "priority_rank"
+    t.integer "user_id"
+    t.string "status"
+    t.string "description"
+    t.time "due_time"
+    t.integer "weight_perc"
+    t.string "task_title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
