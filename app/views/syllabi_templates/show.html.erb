@@ -1,0 +1,126 @@
+<h1>
+  Syllabi #<%= @the_syllabi.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/syllabis">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_syllabi/<%= @the_syllabi.id %>">
+      Delete syllabi
+    </a>
+  </div>
+  <dl>
+    <dt>
+      User
+    </dt>
+    <dd>
+      <%= @the_syllabi.user_id %>
+    </dd>
+
+    <dt>
+      Course
+    </dt>
+    <dd>
+      <%= @the_syllabi.course_id %>
+    </dd>
+
+    <dt>
+      File name
+    </dt>
+    <dd>
+      <%= @the_syllabi.file_name %>
+    </dd>
+
+    <dt>
+      Raw extracted json
+    </dt>
+    <dd>
+      <%= @the_syllabi.raw_extracted_json %>
+    </dd>
+
+    <dt>
+      File url
+    </dt>
+    <dd>
+      <%= @the_syllabi.file_url %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_syllabi.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_syllabi.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit syllabi
+    </h2>
+  </header>
+
+  <form action="/modify_syllabi/<%= @the_syllabi.id %>"  method="post" >
+    <div>
+      <label for="user_id_box">
+        User
+      </label>
+
+      <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_syllabi.user_id %>">
+    </div>
+
+    <div>
+      <label for="course_id_box">
+        Course
+      </label>
+
+      <input type="text" id="course_id_box" name="query_course_id" value="<%= @the_syllabi.course_id %>">
+    </div>
+
+    <div>
+      <label for="file_name_box">
+        File name
+      </label>
+
+      <input type="text" id="file_name_box" name="query_file_name" value="<%= @the_syllabi.file_name %>">
+    </div>
+
+    <div>
+      <label for="raw_extracted_json_box">
+        Raw extracted json
+      </label>
+
+      <input type="text" id="raw_extracted_json_box" name="query_raw_extracted_json" value="<%= @the_syllabi.raw_extracted_json %>">
+    </div>
+
+    <div>
+      <label for="file_url_box">
+        File url
+      </label>
+
+      <input type="text" id="file_url_box" name="query_file_url" value="<%= @the_syllabi.file_url %>">
+    </div>
+
+    <button type="submit">
+      Update syllabi
+    </button>
+  </form>
+</article>
+
+<hr>

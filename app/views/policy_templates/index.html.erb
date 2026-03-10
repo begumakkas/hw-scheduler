@@ -1,0 +1,59 @@
+<h1>
+  List of all policies
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new policy
+    </h2>
+  </header>
+
+  <form action="/insert_policy" method="post">
+    <div>
+      <label for="course_id_box">
+        Course
+      </label>
+
+      <input type="text" id="course_id_box" name="query_course_id">
+    </div>
+
+    <div>
+      <label for="policy_text_box">
+        Policy text
+      </label>
+
+      <input type="text" id="policy_text_box" name="query_policy_text">
+    </div>
+
+    <div>
+      <label for="policy_type_box">
+        Policy type
+      </label>
+
+      <input type="text" id="policy_type_box" name="query_policy_type">
+    </div>
+
+    <button type="submit">
+      Create policy
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_policies.each do |a_policy| %>
+      <li>
+        <a href="/policies/<%= a_policy.id %>">
+          Policy #<%= a_policy.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

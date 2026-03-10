@@ -1,0 +1,75 @@
+<h1>
+  List of all syllabis
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new syllabi
+    </h2>
+  </header>
+
+  <form action="/insert_syllabi" method="post">
+    <div>
+      <label for="user_id_box">
+        User
+      </label>
+
+      <input type="text" id="user_id_box" name="query_user_id">
+    </div>
+
+    <div>
+      <label for="course_id_box">
+        Course
+      </label>
+
+      <input type="text" id="course_id_box" name="query_course_id">
+    </div>
+
+    <div>
+      <label for="file_name_box">
+        File name
+      </label>
+
+      <input type="text" id="file_name_box" name="query_file_name">
+    </div>
+
+    <div>
+      <label for="raw_extracted_json_box">
+        Raw extracted json
+      </label>
+
+      <input type="text" id="raw_extracted_json_box" name="query_raw_extracted_json">
+    </div>
+
+    <div>
+      <label for="file_url_box">
+        File url
+      </label>
+
+      <input type="text" id="file_url_box" name="query_file_url">
+    </div>
+
+    <button type="submit">
+      Create syllabi
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_syllabis.each do |a_syllabi| %>
+      <li>
+        <a href="/syllabis/<%= a_syllabi.id %>">
+          Syllabi #<%= a_syllabi.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

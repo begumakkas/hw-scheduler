@@ -1,0 +1,99 @@
+<h1>
+  List of all courses
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new course
+    </h2>
+  </header>
+
+  <form action="/insert_course" method="post">
+    <div>
+      <label for="name_box">
+        Name
+      </label>
+
+      <input type="text" id="name_box" name="query_name">
+    </div>
+
+    <div>
+      <label for="user_id_box">
+        User
+      </label>
+
+      <input type="text" id="user_id_box" name="query_user_id">
+    </div>
+
+    <div>
+      <label for="location_box">
+        Location
+      </label>
+
+      <input type="text" id="location_box" name="query_location">
+    </div>
+
+    <div>
+      <label for="meeting_time_box">
+        Meeting time
+      </label>
+
+      <input type="time" id="meeting_time_box" name="query_meeting_time">
+    </div>
+
+    <div>
+      <label for="instructor_name_box">
+        Instructor name
+      </label>
+
+      <input type="text" id="instructor_name_box" name="query_instructor_name">
+    </div>
+
+    <div>
+      <label for="instructor_email_box">
+        Instructor email
+      </label>
+
+      <input type="text" id="instructor_email_box" name="query_instructor_email">
+    </div>
+
+    <div>
+      <label for="color_box">
+        Color
+      </label>
+
+      <input type="text" id="color_box" name="query_color">
+    </div>
+
+    <div>
+      <label for="meeting_days_box">
+        Meeting days
+      </label>
+
+      <input type="date" id="meeting_days_box" name="query_meeting_days">
+    </div>
+
+    <button type="submit">
+      Create course
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_courses.each do |a_course| %>
+      <li>
+        <a href="/courses/<%= a_course.id %>">
+          Course #<%= a_course.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

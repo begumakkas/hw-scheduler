@@ -1,0 +1,96 @@
+<h1>
+  Policy #<%= @the_policy.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/policies">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_policy/<%= @the_policy.id %>">
+      Delete policy
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Course
+    </dt>
+    <dd>
+      <%= @the_policy.course_id %>
+    </dd>
+
+    <dt>
+      Policy text
+    </dt>
+    <dd>
+      <%= @the_policy.policy_text %>
+    </dd>
+
+    <dt>
+      Policy type
+    </dt>
+    <dd>
+      <%= @the_policy.policy_type %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_policy.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_policy.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit policy
+    </h2>
+  </header>
+
+  <form action="/modify_policy/<%= @the_policy.id %>"  method="post" >
+    <div>
+      <label for="course_id_box">
+        Course
+      </label>
+
+      <input type="text" id="course_id_box" name="query_course_id" value="<%= @the_policy.course_id %>">
+    </div>
+
+    <div>
+      <label for="policy_text_box">
+        Policy text
+      </label>
+
+      <input type="text" id="policy_text_box" name="query_policy_text" value="<%= @the_policy.policy_text %>">
+    </div>
+
+    <div>
+      <label for="policy_type_box">
+        Policy type
+      </label>
+
+      <input type="text" id="policy_type_box" name="query_policy_type" value="<%= @the_policy.policy_type %>">
+    </div>
+
+    <button type="submit">
+      Update policy
+    </button>
+  </form>
+</article>
+
+<hr>

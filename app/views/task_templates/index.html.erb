@@ -1,0 +1,123 @@
+<h1>
+  List of all tasks
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new task
+    </h2>
+  </header>
+
+  <form action="/insert_task" method="post">
+    <div>
+      <label for="course_id_box">
+        Course
+      </label>
+
+      <input type="text" id="course_id_box" name="query_course_id">
+    </div>
+
+    <div>
+      <label for="exam_flag_box">
+        Exam flag
+      </label>
+
+      <input type="text" id="exam_flag_box" name="query_exam_flag">
+    </div>
+
+    <div>
+      <label for="due_date_box">
+        Due date
+      </label>
+
+      <input type="date" id="due_date_box" name="query_due_date">
+    </div>
+
+    <div>
+      <label for="optional_flag_box">
+        Optional flag
+      </label>
+
+      <input type="text" id="optional_flag_box" name="query_optional_flag">
+    </div>
+
+    <div>
+      <label for="priority_rank_box">
+        Priority rank
+      </label>
+
+      <input type="text" id="priority_rank_box" name="query_priority_rank">
+    </div>
+
+    <div>
+      <label for="user_id_box">
+        User
+      </label>
+
+      <input type="text" id="user_id_box" name="query_user_id">
+    </div>
+
+    <div>
+      <label for="status_box">
+        Status
+      </label>
+
+      <input type="text" id="status_box" name="query_status">
+    </div>
+
+    <div>
+      <label for="description_box">
+        Description
+      </label>
+
+      <input type="text" id="description_box" name="query_description">
+    </div>
+
+    <div>
+      <label for="due_time_box">
+        Due time
+      </label>
+
+      <input type="time" id="due_time_box" name="query_due_time">
+    </div>
+
+    <div>
+      <label for="weight_perc_box">
+        Weight perc
+      </label>
+
+      <input type="text" id="weight_perc_box" name="query_weight_perc">
+    </div>
+
+    <div>
+      <label for="task_title_box">
+        Task title
+      </label>
+
+      <input type="text" id="task_title_box" name="query_task_title">
+    </div>
+
+    <button type="submit">
+      Create task
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_tasks.each do |a_task| %>
+      <li>
+        <a href="/tasks/<%= a_task.id %>">
+          Task #<%= a_task.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

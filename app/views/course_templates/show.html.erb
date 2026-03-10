@@ -1,0 +1,171 @@
+<h1>
+  Course #<%= @the_course.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/courses">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_course/<%= @the_course.id %>">
+      Delete course
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Name
+    </dt>
+    <dd>
+      <%= @the_course.name %>
+    </dd>
+
+    <dt>
+      User
+    </dt>
+    <dd>
+      <%= @the_course.user_id %>
+    </dd>
+
+    <dt>
+      Location
+    </dt>
+    <dd>
+      <%= @the_course.location %>
+    </dd>
+
+    <dt>
+      Meeting time
+    </dt>
+    <dd>
+      <%= @the_course.meeting_time %>
+    </dd>
+
+    <dt>
+      Instructor name
+    </dt>
+    <dd>
+      <%= @the_course.instructor_name %>
+    </dd>
+
+    <dt>
+      Instructor email
+    </dt>
+    <dd>
+      <%= @the_course.instructor_email %>
+    </dd>
+
+    <dt>
+      Color
+    </dt>
+    <dd>
+      <%= @the_course.color %>
+    </dd>
+
+    <dt>
+      Meeting days
+    </dt>
+    <dd>
+      <%= @the_course.meeting_days %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_course.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_course.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit course
+    </h2>
+  </header>
+
+  <form action="/modify_course/<%= @the_course.id %>"  method="post" >
+    <div>
+      <label for="name_box">
+        Name
+      </label>
+
+      <input type="text" id="name_box" name="query_name" value="<%= @the_course.name %>">
+    </div>
+
+    <div>
+      <label for="user_id_box">
+        User
+      </label>
+
+      <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_course.user_id %>">
+    </div>
+
+    <div>
+      <label for="location_box">
+        Location
+      </label>
+
+      <input type="text" id="location_box" name="query_location" value="<%= @the_course.location %>">
+    </div>
+
+    <div>
+      <label for="meeting_time_box">
+        Meeting time
+      </label>
+
+      <input type="time" id="meeting_time_box" name="query_meeting_time" value="<%= @the_course.meeting_time %>">
+    </div>
+
+    <div>
+      <label for="instructor_name_box">
+        Instructor name
+      </label>
+
+      <input type="text" id="instructor_name_box" name="query_instructor_name" value="<%= @the_course.instructor_name %>">
+    </div>
+
+    <div>
+      <label for="instructor_email_box">
+        Instructor email
+      </label>
+
+      <input type="text" id="instructor_email_box" name="query_instructor_email" value="<%= @the_course.instructor_email %>">
+    </div>
+
+    <div>
+      <label for="color_box">
+        Color
+      </label>
+
+      <input type="text" id="color_box" name="query_color" value="<%= @the_course.color %>">
+    </div>
+
+    <div>
+      <label for="meeting_days_box">
+        Meeting days
+      </label>
+
+      <input type="date" id="meeting_days_box" name="query_meeting_days" value="<%= @the_course.meeting_days %>">
+    </div>
+
+    <button type="submit">
+      Update course
+    </button>
+  </form>
+</article>
+
+<hr>

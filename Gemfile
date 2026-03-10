@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem "devise"
 gem "rails", "~> 8.0.2"               # The web framework
 gem "propshaft"                       # Asset pipeline (CSS, JS, images)
 gem "pg", "~> 1.1"                    # PostgreSQL database adapter
