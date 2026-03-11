@@ -5,6 +5,19 @@ class CoursesController < ApplicationController
     @list_of_courses = matching_courses.order({ :created_at => :desc })
     @the_course = matching_courses.at(0)
 
+    today = Date.today
+
+    @current_courses = Course.where.not(start_date: nil, end_date: nil)
+                            .where("start_date <= ? AND end_date >= ?", today, today)
+                            .order(:end_date, :name)
+
+    @past_courses = Course.where.not(end_date: nil)
+                          .where("end_date < ?", today)
+                          .order(end_date: :desc, name: :asc)
+
+    @undated_courses = Course.where(start_date: nil).or(Course.where(end_date: nil))
+                            .order(:name)
+
     render({ :template => "course_templates/index" })
   end
 
@@ -29,6 +42,8 @@ class CoursesController < ApplicationController
     the_course.instructor_email = params.fetch("query_instructor_email")
     the_course.color = params.fetch("query_color")
     the_course.meeting_days = params.fetch("query_meeting_days", []).join(", ")
+    the_course.start_date = params.fetch("query_start_date")
+    the_course.end_date = params.fetch("query_end_date")
 
     if the_course.valid?
       the_course.save
@@ -50,6 +65,9 @@ class CoursesController < ApplicationController
     the_course.instructor_email = params.fetch("query_instructor_email")
     the_course.color = params.fetch("query_color")
     the_course.meeting_days = params.fetch("query_meeting_days", []).join(", ") # join multiple days into one string
+    the_course.start_date = params.fetch("query_start_date")
+    the_course.end_date = params.fetch("query_end_date")
+
 
     if the_course.valid?
       the_course.save

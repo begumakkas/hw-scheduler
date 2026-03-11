@@ -11,6 +11,89 @@
 
 @import "custom-image.css";
 
+/* CSS for courses index page */
+
+.course-section {
+  width: 900px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f8f8f8;
+  margin-bottom: 16px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.course-section summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 14px 18px;
+  background: #efefef;
+  border-bottom: 1px solid #ddd;
+  list-style: none;
+}
+
+.course-section summary:hover {
+  background: #e8e8e8;
+}
+
+.course-section[open] summary {
+  background: #e3e3e3;
+}
+
+.course-section summary::-webkit-details-marker {
+  display: none;
+}
+
+.course-section summary::after {
+  content: "▾";
+  float: right;
+  font-size: 16px;
+}
+
+.course-section:not([open]) summary::after {
+  content: "▸";
+}
+
+.course-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.course-list li {
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee;
+}
+
+.course-list li:last-child {
+  border-bottom: none;
+}
+
+.course-list li:hover {
+  background: #fafafa;
+}
+
+.course-list a {
+  font-weight: 600;
+  text-decoration: none;
+  color: #222;
+}
+
+.course-list a:hover {
+  text-decoration: underline;
+}
+
+.course-meta {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+
+
+/* CSS for task lists */
+
 .task-list-box,
 .completed-box {
   width: 900px;
