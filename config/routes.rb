@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  get("/", { :controller => "syllabis", :action => ""})
+  # get("/", { :controller => "syllabis", :action => ""})
 
   # Routes for the Syllabi resource:
 
   # CREATE
-  post("/insert_syllabi", { :controller => "syllabis", :action => "create" })
+  post("/insert_syllabi", { :controller => "syllabis", :action => "create" }) # delete if rails generated upload form is removed
+  # Manual created syllabus upload form
+  post("/upload_syllabus", { :controller => "syllabis", :action => "upload"  })
 
   # READ
   get("/syllabis", { :controller => "syllabis", :action => "index" })
