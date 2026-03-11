@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
   def index
-    # @upcoming_tasks = Task.where.not(status: "completed").order(:due_date, :due_time)
-    # @completed_tasks = Task.where(status: "completed").order(:due_date, :due_time)
     sort_choice = params.fetch("sort", "due_date")
 
     base_upcoming = Task.where.not(status: "completed")
