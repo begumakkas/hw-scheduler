@@ -1,205 +1,212 @@
-<h1>Homework Tracker</h1>
-
-<h2>
-  Upload Syllabus
-</h2>
-
-<h3>It may take a few seconds after you upload a syllabus for the parsing to complete. Do not refresh the page while this process is running.</h3>
-
-
-<form action="/upload_syllabus" method="post" enctype="multipart/form-data">
-  <div>
-    <label for="pdf_box">
-      Syllabus PDF
-    </label>
-
-    <input type="file" id="pdf_box" name="pdf" accept=".pdf,application/pdf">
+<div class="home-page">
+  <div class="home-header">
+    <h1>Homework Tracker</h1>
+    <p class="home-subtitle">Stay on top of your assignments.</p>
   </div>
 
-  <button type="submit">
-    Upload syllabus
-  </button>
-</form>
+  <div class="upload-card">
+    <h2>Upload Syllabus</h2>
 
-<hr>
+    <p class="upload-help-text">
+      It may take a few seconds after you upload a syllabus for the parsing to complete.
+      Do not refresh the page while this process is running.
+    </p>
 
-<div class="task-list-box">
-  <h2>Upcoming Tasks</h2>
+    <form action="/upload_syllabus" method="post" enctype="multipart/form-data" class="upload-form">
+      <div class="upload-form-row">
+        <label for="pdf_box" class="upload-label">
+          Syllabus PDF
+        </label>
 
-  <div class="task-filter-bar">
-    <form action="/" method="get">
-      <label for="sort_box">Order by:</label>
+        <input type="file" id="pdf_box" name="pdf" accept=".pdf,application/pdf" class="upload-file-input">
+      </div>
 
-      <select id="sort_box" name="sort" onchange="this.form.submit();">
-        <option value="due_date" <%= "selected" if @selected_sort == "due_date" %>>
-          Earliest due date
-        </option>
-        <option value="course" <%= "selected" if @selected_sort == "course" %>>
-          Course
-        </option>
-        <option value="priority" <%= "selected" if @selected_sort == "priority" %>>
-          Priority
-        </option>
-      </select>
+      <button type="submit" class="upload-button">
+        Upload syllabus
+      </button>
     </form>
   </div>
 
-  <div class="task-scroll-area">
-    <div class="task-header-row">
-      <div></div>
-      <div>Task</div>
-      <div>Due Date</div>
-      <div>Priority</div>
-      <div>Days Left</div>
-      <div></div>
+  <hr class="section-divider">
+
+  <div class="task-list-box">
+    <h2>Upcoming Tasks</h2>
+
+    <div class="task-filter-bar">
+      <form action="/" method="get">
+        <label for="sort_box">Order by:</label>
+
+        <select id="sort_box" name="sort" onchange="this.form.submit();">
+          <option value="due_date" <%= "selected" if @selected_sort == "due_date" %>>
+            Earliest due date
+          </option>
+          <option value="course" <%= "selected" if @selected_sort == "course" %>>
+            Course
+          </option>
+          <option value="priority" <%= "selected" if @selected_sort == "priority" %>>
+            Priority
+          </option>
+        </select>
+      </form>
     </div>
 
-    <% @upcoming_tasks.each do |task| %>
-      <div class="task-row"
-            style="
-              --course-color: <%= task.course&.color.presence || '#cccccc' %>;
-              background-color: <%= task.course&.color.present? ? "#{task.course.color}15" : '#f8f8f8' %>;
-            "
-          >
-        <div>
-          <form action="/mark_task_complete/<%= task.id %>" method="post">
-            <input type="hidden" name="query_completed" value="0">
+    <div class="task-scroll-area">
+      <div class="task-header-row">
+        <div></div>
+        <div>Task</div>
+        <div>Due Date</div>
+        <div>Priority</div>
+        <div>Days Left</div>
+        <div></div>
+      </div>
 
-            <input
-              type="checkbox"
-              name="query_completed"
-              value="1"
-              class="task-checkbox"
-              <%= "checked" if task.status == "completed" %>
-              onchange="this.form.submit();"
+      <% @upcoming_tasks.each do |task| %>
+        <div class="task-row"
+              style="
+                --course-color: <%= task.course&.color.presence || '#cccccc' %>;
+                background-color: <%= task.course&.color.present? ? "#{task.course.color}15" : '#f8f8f8' %>;
+              "
             >
-          </form>
-        </div>
+          <div>
+            <form action="/mark_task_complete/<%= task.id %>" method="post">
+              <input type="hidden" name="query_completed" value="0">
 
-        <div class="task-info">
-          <div class="task-title">
-            <%= task.task_title %>
+              <input
+                type="checkbox"
+                name="query_completed"
+                value="1"
+                class="task-checkbox"
+                <%= "checked" if task.status == "completed" %>
+                onchange="this.form.submit();"
+              >
+            </form>
           </div>
 
-          <div class="task-meta">
-            <% if task.course.present? %>
-              <a href="/courses/<%= task.course.id %>">
-                <%= task.course.name %>
-              </a>
+          <div class="task-info">
+            <div class="task-title">
+              <%= task.task_title %>
+            </div>
+
+            <div class="task-meta">
+              <% if task.course.present? %>
+                <a href="/courses/<%= task.course.id %>">
+                  <%= task.course.name %>
+                </a>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="task-due-date">
+            <%= task.due_date.present? ? task.due_date : "—" %>
+          </div>
+
+          <div class="task-priority">
+            <% if task.priority_rank.present? %>
+              <% priority_label =
+                case task.priority_rank
+                when 1 then "High"
+                when 2 then "Medium"
+                when 3 then "Low"
+                else task.priority_rank
+                end
+              %>
+              <%= priority_label %>
+            <% else %>
+              —
             <% end %>
           </div>
+
+          <div class="task-days-left">
+            <% if task.due_date.present? %>
+              <% days_left = (task.due_date - Date.today).to_i + 1 %>
+              <%= days_left %>
+            <% else %>
+              —
+            <% end %>
+          </div>
+
+          <div class="task-link-cell">
+            <a href="/tasks/<%= task.id %>">Edit/View Details</a>
+          </div>
         </div>
-
-        <div class="task-due-date">
-          <%= task.due_date.present? ? task.due_date : "—" %>
-        </div>
-
-        <div class="task-priority">
-          <% if task.priority_rank.present? %>
-            <% priority_label =
-              case task.priority_rank
-              when 1 then "High"
-              when 2 then "Medium"
-              when 3 then "Low"
-              else task.priority_rank
-              end
-            %>
-            <%= priority_label %>
-          <% else %>
-            —
-          <% end %>
-        </div>
-
-        <div class="task-days-left">
-          <% if task.due_date.present? %>
-            <% days_left = (task.due_date - Date.today).to_i + 1 %>
-            <%= days_left %>
-          <% else %>
-            —
-          <% end %>
-        </div>
-
-        <div class="task-link-cell">
-          <a href="/tasks/<%= task.id %>">Edit/View Details</a>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<details class="completed-box">
-  <summary>Completed Tasks (<%= @completed_tasks.count %>)</summary>
-
-  <div class="task-scroll-area">
-    <div class="task-header-row">
-      <div></div>
-      <div>Task</div>
-      <div>Due Date</div>
-      <div>Priority</div>
-      <div>Days Left</div>
-      <div></div>
+      <% end %>
     </div>
-
-    <% @completed_tasks.each do |task| %>
-      <div class="task-row task-completed">
-        <div>
-          <form action="/mark_task_complete/<%= task.id %>" method="post">
-            <input type="hidden" name="query_completed" value="0">
-
-            <input
-              type="checkbox"
-              name="query_completed"
-              value="1"
-              class="task-checkbox"
-              checked
-              onchange="this.form.submit();"
-            >
-          </form>
-        </div>
-
-        <div class="task-info">
-          <div class="task-title">
-            <%= task.task_title %>
-          </div>
-
-          <div class="task-meta">
-            <%= task.course.name if task.course.present? %>
-          </div>
-        </div>
-
-        <div class="task-due-date">
-          <%= task.due_date.present? ? task.due_date : "—" %>
-        </div>
-
-        <div class="task-priority">
-          <% if task.priority_rank.present? %>
-            <% priority_label =
-              case task.priority_rank
-              when 1 then "High"
-              when 2 then "Medium"
-              when 3 then "Low"
-              else task.priority_rank
-              end
-            %>
-            <%= priority_label %>
-          <% else %>
-            —
-          <% end %>
-        </div>
-
-        <div class="task-days-left">
-          <% if task.due_date.present? %>
-            <% days_left = (task.due_date - Date.today).to_i + 1 %>
-            <%= days_left %>
-          <% else %>
-            —
-          <% end %>
-        </div>
-
-        <div class="task-link-cell">
-          <a href="/tasks/<%= task.id %>">Edit/View Details</a>
-        </div>
-      </div>
-    <% end %>
   </div>
-</details>
+
+  <details class="completed-box">
+    <summary>Completed Tasks (<%= @completed_tasks.count %>)</summary>
+
+    <div class="task-scroll-area">
+      <div class="task-header-row">
+        <div></div>
+        <div>Task</div>
+        <div>Due Date</div>
+        <div>Priority</div>
+        <div>Days Left</div>
+        <div></div>
+      </div>
+
+      <% @completed_tasks.each do |task| %>
+        <div class="task-row task-completed">
+          <div>
+            <form action="/mark_task_complete/<%= task.id %>" method="post">
+              <input type="hidden" name="query_completed" value="0">
+
+              <input
+                type="checkbox"
+                name="query_completed"
+                value="1"
+                class="task-checkbox"
+                checked
+                onchange="this.form.submit();"
+              >
+            </form>
+          </div>
+
+          <div class="task-info">
+            <div class="task-title">
+              <%= task.task_title %>
+            </div>
+
+            <div class="task-meta">
+              <%= task.course.name if task.course.present? %>
+            </div>
+          </div>
+
+          <div class="task-due-date">
+            <%= task.due_date.present? ? task.due_date : "—" %>
+          </div>
+
+          <div class="task-priority">
+            <% if task.priority_rank.present? %>
+              <% priority_label =
+                case task.priority_rank
+                when 1 then "High"
+                when 2 then "Medium"
+                when 3 then "Low"
+                else task.priority_rank
+                end
+              %>
+              <%= priority_label %>
+            <% else %>
+              —
+            <% end %>
+          </div>
+
+          <div class="task-days-left">
+            <% if task.due_date.present? %>
+              <% days_left = (task.due_date - Date.today).to_i + 1 %>
+              <%= days_left %>
+            <% else %>
+              —
+            <% end %>
+          </div>
+
+          <div class="task-link-cell">
+            <a href="/tasks/<%= task.id %>">Edit/View Details</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </details>
+</div>
