@@ -31,7 +31,12 @@
     </div>
 
     <% @upcoming_tasks.each do |task| %>
-      <div class="task-row">
+      <div class="task-row"
+            style="
+              --course-color: <%= task.course&.color.presence || '#cccccc' %>;
+              background-color: <%= task.course&.color.present? ? "#{task.course.color}15" : '#f8f8f8' %>;
+            "
+          >
         <div>
           <form action="/mark_task_complete/<%= task.id %>" method="post">
             <input type="hidden" name="query_completed" value="0">
@@ -53,7 +58,11 @@
           </div>
 
           <div class="task-meta">
-            <%= task.course.name if task.course.present? %>
+            <% if task.course.present? %>
+              <a href="/courses/<%= task.course.id %>">
+                <%= task.course.name %>
+              </a>
+            <% end %>
           </div>
         </div>
 
@@ -151,5 +160,3 @@
     <% end %>
   </div>
 </details>
-
-

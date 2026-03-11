@@ -11,6 +11,15 @@
 
 @import "custom-image.css";
 
+.task-row {
+  border-bottom: 1px solid #eee;
+  border-left: 6px solid var(--course-color, #cccccc);
+  padding: 12px 16px 12px 12px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+
 /* CSS for courses index page */
 
 .course-section {
