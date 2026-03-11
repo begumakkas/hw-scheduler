@@ -3,6 +3,24 @@
 <div class="task-list-box">
   <h2>Upcoming Tasks</h2>
 
+<div style="margin-bottom: 12px;">
+  <form action="/" method="get">
+    <label for="sort_box">Order by:</label>
+
+    <select id="sort_box" name="sort" onchange="this.form.submit();">
+      <option value="due_date" <%= "selected" if @selected_sort == "due_date" %>>
+        Earliest Due Date
+      </option>
+      <option value="course" <%= "selected" if @selected_sort == "course" %>>
+        Course
+      </option>
+      <option value="priority" <%= "selected" if @selected_sort == "priority" %>>
+        Priority
+      </option>
+    </select>
+  </form>
+</div>
+
   <div class="task-scroll-area">
     <% @upcoming_tasks.each do |task| %>
       <div class="task-row">
