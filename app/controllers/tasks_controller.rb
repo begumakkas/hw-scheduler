@@ -71,4 +71,24 @@ class TasksController < ApplicationController
 
     redirect_to("/tasks", { :notice => "Task deleted successfully." } )
   end
+  
+
+  def mark_complete
+    the_id = params.fetch("path_id")
+    the_task = Task.where({ :id => the_id }).at(0)
+
+    if params.fetch("query_completed", "0") == "1"
+      the_task.status = "completed"
+    else
+      the_task.status = "not_started"
+    end
+
+    if the_task.valid?
+      the_task.save
+      redirect_back(fallback_location: "/")
+    else
+      redirect_back({ :fallback_location => "/", :alert => the_task.errors.full_messages.to_sentence })
+    end
+  end
+
 end

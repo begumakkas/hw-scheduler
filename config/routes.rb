@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  # Routes for HOME page
   get("/", { :controller => "home", :action => "index"})
+
+  post("/mark_task_complete/:path_id", { controller: "tasks", action: "mark_complete" })
 
   # Routes for the Syllabi resource:
 

@@ -11,11 +11,13 @@
 
 @import "custom-image.css";
 
-.task-list-box {
+.task-list-box,
+.completed-box {
   width: 700px;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
+  margin-bottom: 16px;
 }
 
 .task-scroll-area {
@@ -49,4 +51,15 @@
 .task-meta {
   font-size: 14px;
   color: #666;
+}
+
+.task-completed .task-title {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.completed-box summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
