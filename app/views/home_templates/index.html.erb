@@ -27,6 +27,7 @@
       <div>Task</div>
       <div>Due Date</div>
       <div>Priority</div>
+      <div>Days Left</div>
       <div></div>
     </div>
 
@@ -86,6 +87,15 @@
           <% end %>
         </div>
 
+        <div class="task-days-left">
+          <% if task.due_date.present? %>
+            <% days_left = (task.due_date - Date.today).to_i + 1 %>
+            <%= days_left %>
+          <% else %>
+            —
+          <% end %>
+        </div>
+
         <div class="task-link-cell">
           <a href="/tasks/<%= task.id %>">Edit/View Details</a>
         </div>
@@ -103,6 +113,7 @@
       <div>Task</div>
       <div>Due Date</div>
       <div>Priority</div>
+      <div>Days Left</div>
       <div></div>
     </div>
 
@@ -148,6 +159,15 @@
               end
             %>
             <%= priority_label %>
+          <% else %>
+            —
+          <% end %>
+        </div>
+
+        <div class="task-days-left">
+          <% if task.due_date.present? %>
+            <% days_left = (task.due_date - Date.today).to_i + 1 %>
+            <%= days_left %>
           <% else %>
             —
           <% end %>

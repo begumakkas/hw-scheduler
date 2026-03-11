@@ -120,7 +120,7 @@
 .task-header-row,
 .task-row {
   display: grid;
-  grid-template-columns: 60px 3fr 140px 100px 140px;
+  grid-template-columns: 60px 3fr 120px 100px 100px 140px;
   align-items: center;
   column-gap: 16px;
 }
