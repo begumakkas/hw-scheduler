@@ -10,10 +10,11 @@ class CoursesController < ApplicationController
 
   def show
     the_id = params.fetch("path_id")
-
     matching_courses = Course.where({ :id => the_id })
 
     @the_course = matching_courses.at(0)
+
+    @upcoming_tasks = @the_course.tasks.where.not(status: "completed").order(:due_date, :due_time)
 
     render({ :template => "course_templates/show" })
   end
