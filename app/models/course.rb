@@ -7,7 +7,7 @@
 #  instructor_email :string
 #  instructor_name  :string
 #  location         :string
-#  meeting_days     :date
+#  meeting_days     :string
 #  meeting_time     :time
 #  name             :string
 #  created_at       :datetime         not null

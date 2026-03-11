@@ -155,11 +155,24 @@
     </div>
 
     <div>
-      <label for="meeting_days_box">
+      <label>
         Meeting days
       </label>
 
-      <input type="date" id="meeting_days_box" name="query_meeting_days" value="<%= @the_course.meeting_days %>">
+      <% selected_days = (@the_course.meeting_days || "").split(",").map(&:strip) %>
+
+      <% ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
+        <div>
+          <input
+            type="checkbox"
+            id="<%= day.downcase %>_box"
+            name="query_meeting_days[]"
+            value="<%= day %>"
+            <%= "checked" if selected_days.include?(day) %>
+          >
+          <label for="<%= day.downcase %>_box"><%= day %></label>
+        </div>
+      <% end %>
     </div>
 
     <button type="submit">

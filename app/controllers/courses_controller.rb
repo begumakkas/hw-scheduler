@@ -47,7 +47,7 @@ class CoursesController < ApplicationController
     the_course.instructor_name = params.fetch("query_instructor_name")
     the_course.instructor_email = params.fetch("query_instructor_email")
     the_course.color = params.fetch("query_color")
-    the_course.meeting_days = params.fetch("query_meeting_days")
+    the_course.meeting_days = params.fetch("query_meeting_days", []).join(", ") # join multiple days into one string
 
     if the_course.valid?
       the_course.save

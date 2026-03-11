@@ -73,7 +73,7 @@ class SyllabisController < ApplicationController
       file_name: uploaded_file.original_filename,
       file_url: uploaded_file.original_filename
     )
-
+    
     redirect_to("/courses/#{course.id}", notice: "Syllabus uploaded successfully.")
 
   end
