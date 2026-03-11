@@ -4,12 +4,14 @@
 #
 #  id               :bigint           not null, primary key
 #  color            :string
+#  end_date         :date
 #  instructor_email :string
 #  instructor_name  :string
 #  location         :string
 #  meeting_days     :string
 #  meeting_time     :time
 #  name             :string
+#  start_date       :date
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  user_id          :integer

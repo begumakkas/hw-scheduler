@@ -3,6 +3,7 @@ class CoursesController < ApplicationController
     matching_courses = Course.all
 
     @list_of_courses = matching_courses.order({ :created_at => :desc })
+    @the_course = matching_courses.at(0)
 
     render({ :template => "course_templates/index" })
   end
@@ -26,7 +27,7 @@ class CoursesController < ApplicationController
     the_course.instructor_name = params.fetch("query_instructor_name")
     the_course.instructor_email = params.fetch("query_instructor_email")
     the_course.color = params.fetch("query_color")
-    the_course.meeting_days = params.fetch("query_meeting_days")
+    the_course.meeting_days = params.fetch("query_meeting_days", []).join(", ")
 
     if the_course.valid?
       the_course.save
