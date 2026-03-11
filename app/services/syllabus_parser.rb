@@ -92,6 +92,9 @@ class SyllabusParser
                     - Use a short readable task title, such as the author name, short article title, or chapter title, rather than the full citation.
                     - Do not ignore readings just because they are embedded in a schedule table instead of listed under assignments.
 
+                  - populate "meeting_days" with the days of the week that the class meets. For example, syllabus might say "T/Th", which means the class meets on Tuesdays and Thursdays.
+                  - populate "meeting_time" with class start and end times. For example "12:30pm to 1:50pm"
+
                   Validation rules:
                   - Before returning the JSON, verify that the number of generated tasks matches any explicit counts stated in the syllabus.
                   - If the syllabus states "7 reaction papers", the output must include 7 reaction paper tasks.

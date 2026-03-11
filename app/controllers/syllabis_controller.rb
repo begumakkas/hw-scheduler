@@ -59,4 +59,22 @@ class SyllabisController < ApplicationController
 
     redirect_to("/syllabis", { :notice => "Syllabi deleted successfully." } )
   end
+
+  def upload
+    uploaded_file = params[:pdf]
+
+    parsed_data = SyllabusParser.call(
+      file_path: uploaded_file.tempfile.path
+    )
+
+    course = SyllabusImporter.call(
+      user: User.first,
+      parsed_data: parsed_data,
+      file_name: uploaded_file.original_filename,
+      file_url: uploaded_file.original_filename
+    )
+
+    redirect_to("/courses/#{course.id}", notice: "Syllabus uploaded successfully.")
+
+  end
 end
