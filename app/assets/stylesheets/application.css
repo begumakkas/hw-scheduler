@@ -10,3 +10,43 @@
  */
 
 @import "custom-image.css";
+
+.task-list-box {
+  width: 700px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.task-scroll-area {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.task-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-checkbox {
+  width: 16px;
+  height: 16px;
+}
+
+.task-title {
+  font-weight: 600;
+}
+
+.task-meta {
+  font-size: 14px;
+  color: #666;
+}
