@@ -11,19 +11,12 @@
 
 @import "custom-image.css";
 
-.task-row {
-  border-bottom: 1px solid #eee;
-  border-left: 6px solid var(--course-color, #cccccc);
-  padding: 12px 16px 12px 12px;
-  border-radius: 4px;
-  margin-bottom: 4px;
-}
-
 
 /* CSS for courses index page */
 
 .course-section {
-  width: 900px;
+  width: 100%;
+  max-width: 900px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background: #f8f8f8;
@@ -105,12 +98,14 @@
 
 .task-list-box,
 .completed-box {
-  width: 900px;
+  width: 100%;
+  max-width: 1000px;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 16px;
   background: #f8f8f8;
+  box-sizing: border-box;
 }
 
 .task-filter-bar {
@@ -183,4 +178,12 @@
   cursor: pointer;
   font-weight: 600;
   margin-bottom: 10px;
+}
+
+.task-row {
+  border-bottom: 1px solid #eee;
+  border-left: 6px solid var(--course-color, #cccccc);
+  padding: 12px 16px 12px 12px;
+  border-radius: 4px;
+  margin-bottom: 4px;
 }
