@@ -131,6 +131,22 @@
     </div>
 
     <div>
+      <label for="start_date_box">
+        Course Start Date
+      </label>
+
+      <input type="date" id="start_date_box" name="query_start_date" value="<%= @the_course.start_date %>">
+    </div>
+
+    <div>
+      <label for="end_date_box">
+        Course End Date
+      </label>
+
+      <input type="date" id="end_date_box" name="query_end_date" value="<%= @the_course.end_date %>">
+    </div>
+
+    <div>
       <label for="instructor_name_box">
         Instructor name
       </label>
@@ -190,9 +206,17 @@
   </h4>
 
   <div class="task-scroll-area">
+    <div class="task-header-row">
+      <div></div>
+      <div>Task</div>
+      <div>Due Date</div>
+      <div>Priority</div>
+      <div></div>
+    </div>
+
     <% @upcoming_tasks.each do |task| %>
       <div class="task-row">
-        <div class="task-left">
+        <div>
           <form action="/mark_task_complete/<%= task.id %>" method="post">
             <input type="hidden" name="query_completed" value="0">
 
@@ -205,23 +229,43 @@
               onchange="this.form.submit();"
             >
           </form>
+        </div>
 
-          <div class="task-info">
-            <div class="task-title">
-              <%= task.task_title %>
-            </div>
+        <div class="task-info">
+          <div class="task-title">
+            <%= task.task_title %>
+          </div>
 
-            <div class="task-meta">
-              <%= task.course.name if task.course.present? %>
-              <% if task.due_date.present? %>
-                · Due <%= task.due_date %>
-              <% end %>
-            </div>
+          <div class="task-meta">
+            <%= task.course.name if task.course.present? %>
           </div>
         </div>
 
-        <a href="/tasks/<%= task.id %>">Edit</a>
+        <div class="task-due-date">
+          <%= task.due_date.present? ? task.due_date : "—" %>
+        </div>
+
+        <div class="task-priority">
+          <% if task.priority_rank.present? %>
+            <% priority_label =
+              case task.priority_rank
+              when 1 then "High"
+              when 2 then "Medium"
+              when 3 then "Low"
+              else task.priority_rank
+              end
+            %>
+            <%= priority_label %>
+          <% else %>
+            —
+          <% end %>
+        </div>
+
+        <div class="task-link-cell">
+          <a href="/tasks/<%= task.id %>">Edit/View Details</a>
+        </div>
       </div>
     <% end %>
   </div>
 </div>
+
