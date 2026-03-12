@@ -7,8 +7,10 @@ class SyllabusImporter
       instructor_email: parsed_data["instructor_email"],
       meeting_days: parsed_data["meeting_days"],
       meeting_time: parsed_data["meeting_time"],
+      start_date: parsed_data["start_date"].presence,
+      end_date: parsed_data["end_date"].presence,
       location: parsed_data["location"],
-      color: %w[red blue green purple teal orange].sample
+      color: ["#EF4444", "#3B82F6", "#22C55E", "#8B5CF6", "#14B8A6", "#F97316"].sample
     )
 
     Syllabi.create!(
