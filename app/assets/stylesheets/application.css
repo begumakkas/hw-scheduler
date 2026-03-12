@@ -12,6 +12,21 @@
 @import "custom-image.css";
 
 
+.task-filter-bar form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.upload-card,
+.task-list-box,
+.completed-box {
+  width: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
+}
+
 /* CSS for home page */
 body {
   margin: 0;
@@ -44,8 +59,8 @@ body {
 }
 
 .upload-card {
-  width: 100%;
-  max-width: 900px;
+  /* width: 100%;
+  max-width: 900px; */
   background: #ffffff;
   border: 1px solid #d9d9d9;
   border-radius: 10px;
