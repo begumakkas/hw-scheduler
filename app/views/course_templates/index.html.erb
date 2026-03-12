@@ -1,187 +1,174 @@
-<article>
-  <header>
-    <h2>
-      Add a new course
-    </h2>
-  </header>
+<div class="courses-page">
+  <div class="course-form-card">
+    <article>
+      <header>
+        <h2>
+          Add a new course
+        </h2>
+      </header>
 
-  <form action="/insert_course" method="post">
-    <div>
-      <label for="name_box">
-        Name
-      </label>
+      <form action="/insert_course" method="post" class="course-form">
+        <div class="course-form-row">
+          <label for="name_box">
+            Name
+          </label>
 
-      <input type="text" id="name_box" name="query_name">
-    </div>
-
-    <div>
-      <label for="user_id_box">
-        User
-      </label>
-
-      <input type="text" id="user_id_box" name="query_user_id">
-    </div>
-
-    <div>
-      <label for="location_box">
-        Location
-      </label>
-
-      <input type="text" id="location_box" name="query_location">
-    </div>
-
-    <div>
-      <label for="meeting_time_box">
-        Meeting time
-      </label>
-
-      <input type="time" id="meeting_time_box" name="query_meeting_time">
-    </div>
-
-    <div>
-      <label for="meeting_days_box">
-        Meeting days
-      </label>
-
-      <% selected_days = [] %>
-
-      <% ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
-        <div>
-          <input
-            type="checkbox"
-            id="<%= day.downcase %>_box"
-            name="query_meeting_days[]"
-            value="<%= day %>"
-            <%= "checked" if selected_days.include?(day) %>
-          >
-          <label for="<%= day.downcase %>_box"><%= day %></label>
+          <input type="text" id="name_box" name="query_name">
         </div>
+
+        <div class="course-form-row">
+          <label for="user_id_box">
+            User
+          </label>
+
+          <input type="text" id="user_id_box" name="query_user_id">
+        </div>
+
+        <div class="course-form-row">
+          <label for="location_box">
+            Location
+          </label>
+
+          <input type="text" id="location_box" name="query_location">
+        </div>
+
+        <div class="course-form-row">
+          <label for="meeting_time_box">
+            Meeting time
+          </label>
+
+          <input type="time" id="meeting_time_box" name="query_meeting_time">
+        </div>
+
+        <div class="course-form-row">
+          <label>
+            Meeting days
+          </label>
+
+          <% selected_days = [] %>
+
+          <div class="meeting-days-grid">
+            <% ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
+              <label class="meeting-day-option" for="<%= day.downcase %>_box">
+                <input
+                  type="checkbox"
+                  id="<%= day.downcase %>_box"
+                  name="query_meeting_days[]"
+                  value="<%= day %>"
+                  <%= "checked" if selected_days.include?(day) %>
+                >
+                <span><%= day %></span>
+              </label>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="course-form-row">
+          <label for="start_date_box">
+            Course Start Date
+          </label>
+
+          <input type="date" id="start_date_box" name="query_start_date">
+        </div>
+
+        <div class="course-form-row">
+          <label for="end_date_box">
+            Course End Date
+          </label>
+
+          <input type="date" id="end_date_box" name="query_end_date">
+        </div>
+
+        <div class="course-form-row">
+          <label for="instructor_name_box">
+            Instructor Name
+          </label>
+
+          <input type="text" id="instructor_name_box" name="query_instructor_name">
+        </div>
+
+        <div class="course-form-row">
+          <label for="instructor_email_box">
+            Instructor Email
+          </label>
+
+          <input type="text" id="instructor_email_box" name="query_instructor_email">
+        </div>
+
+        <div class="course-form-row">
+          <label for="color_box">
+            Color
+          </label>
+
+          <input type="color" id="color_box" name="query_color" value="#4F46E5">
+        </div>
+
+        <button type="submit" class="course-submit-button">
+          Create course
+        </button>
+      </form>
+    </article>
+  </div>
+
+  <hr class="section-divider">
+
+  <details class="course-section" open>
+    <summary>
+      Current Courses (<%= @current_courses.count %>)
+    </summary>
+
+    <ul class="course-list">
+      <% @current_courses.each do |a_course| %>
+        <li>
+          <a href="/courses/<%= a_course.id %>">
+            <%= a_course.name %>
+          </a>
+
+          <div class="course-meta">
+            <% if a_course.end_date.present? %>
+              Ends <%= a_course.end_date %>
+            <% end %>
+          </div>
+        </li>
       <% end %>
-    </div>
+    </ul>
+  </details>
 
-    <div>
-      <label for="start_date_box">
-        Course Start Date
-      </label>
+  <details class="course-section">
+    <summary>
+      Past Courses (<%= @past_courses.count %>)
+    </summary>
 
-      <input type="date" id="start_date_box" name="query_start_date" value="<%= @the_course.start_date %>">
-    </div>
+    <ul class="course-list">
+      <% @past_courses.each do |a_course| %>
+        <li>
+          <a href="/courses/<%= a_course.id %>">
+            <%= a_course.name %>
+          </a>
 
-    <div>
-      <label for="end_date_box">
-        Course End Date
-      </label>
+          <div class="course-meta">
+            <% if a_course.end_date.present? %>
+              Ended <%= a_course.end_date %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </details>
 
-      <input type="date" id="end_date_box" name="query_end_date" value="<%= @the_course.end_date %>">
-    </div>
+  <details class="course-section">
+    <summary>
+      Undated Courses (<%= @undated_courses.count %>)
+    </summary>
 
-    <div>
-      <label for="instructor_name_box">
-        Instructor Name
-      </label>
-
-      <input type="text" id="instructor_name_box" name="query_instructor_name">
-    </div>
-
-    <div>
-      <label for="instructor_email_box">
-        Instructor Email
-      </label>
-
-      <input type="text" id="instructor_email_box" name="query_instructor_email">
-    </div>
-
-    <div>
-      <label for="color_box">
-        Color
-      </label>
-
-      <input type="color" id="color_box" name="query_color" value="#4F46E5">
-    </div>
-
-
-
-    <button type="submit">
-      Create course
-    </button>
-  </form>
-</article>
-
-<hr>
-
-<details class="course-section" open>
-  <summary>
-    Current Courses (<%= @current_courses.count %>)
-  </summary>
-
-  <ul class="course-list">
-    <% @current_courses.each do |a_course| %>
-      <li>
-        <a href="/courses/<%= a_course.id %>">
-          <%= a_course.name %>
-        </a>
-
-        <div class="course-meta">
-          <% if a_course.end_date.present? %>
-            Ends <%= a_course.end_date %>
-          <% end %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
-</details>
-
-<details class="course-section">
-  <summary>
-    Past Courses (<%= @past_courses.count %>)
-  </summary>
-
-  <ul class="course-list">
-    <% @past_courses.each do |a_course| %>
-      <li>
-        <a href="/courses/<%= a_course.id %>">
-          <%= a_course.name %>
-        </a>
-
-        <div class="course-meta">
-          <% if a_course.end_date.present? %>
-            Ended <%= a_course.end_date %>
-          <% end %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
-</details>
-
-<details class="course-section">
-  <summary>
-    Undated Courses (<%= @undated_courses.count %>)
-  </summary>
-
-  <ul class="course-list">
-    <% @undated_courses.each do |a_course| %>
-      <li>
-        <a href="/courses/<%= a_course.id %>">
-          <%= a_course.name %>
-        </a>
-      </li>
-    <% end %>
-  </ul>
-</details>
-
-<hr>
-
-
-<!--<article>
-  <ul>
-    <%# @list_of_courses.each do |a_course| %>-->
-<!--      <li>
-        <a href="/courses/<%#= a_course.id %>">
-          Course #<%#= a_course.id %>
-        </a>
-      </li>
-    <%# end %>-->
-<!--  </ul>
-</article>
-
-<hr>-->
+    <ul class="course-list">
+      <% @undated_courses.each do |a_course| %>
+        <li>
+          <a href="/courses/<%= a_course.id %>">
+            <%= a_course.name %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </details>
+</div>

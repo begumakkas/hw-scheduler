@@ -1,206 +1,203 @@
-<h1>
-  <%= @the_course.name %>
-</h1>
+<div class="courses-page">
+  <div class="course-page-header">
+    <h1><%= @the_course.name %></h1>
 
-<div>
-  <a href="/courses">
-    Go back
-  </a>
-</div>
-
-<div>
-  <a href="/delete_course/<%= @the_course.id %>">
-    Delete course
-  </a>
-</div>
-
-<hr>
-
-<article>
-  <header>
-    <h2>
-      Edit Course Information
-    </h2>
-  </header>
-
-  <form action="/modify_course/<%= @the_course.id %>" method="post">
-    <div>
-      <label for="name_box">
-        Name
-      </label>
-
-      <input type="text" id="name_box" name="query_name" value="<%= @the_course.name %>">
+    <div class="course-page-actions">
+      <a href="/courses" class="course-page-link">Go back</a>
+      <a href="/delete_course/<%= @the_course.id %>" class="course-page-link danger-link">Delete course</a>
     </div>
+  </div>
 
-    <div>
-      <label for="user_id_box">
-        User
-      </label>
+  <div class="course-form-card">
+    <article>
+      <header>
+        <h2>
+          Edit Course Information
+        </h2>
+      </header>
 
-      <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_course.user_id %>">
-    </div>
+      <form action="/modify_course/<%= @the_course.id %>" method="post" class="course-form">
+        <div class="course-form-row">
+          <label for="name_box">
+            Name
+          </label>
 
-    <div>
-      <label for="location_box">
-        Location
-      </label>
+          <input type="text" id="name_box" name="query_name" value="<%= @the_course.name %>">
+        </div>
 
-      <input type="text" id="location_box" name="query_location" value="<%= @the_course.location %>">
-    </div>
+        <div class="course-form-row">
+          <label for="user_id_box">
+            User
+          </label>
 
-    <div>
-      <label for="meeting_time_box">
-        Meeting time
-      </label>
+          <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_course.user_id %>">
+        </div>
 
-      <input type="time" id="meeting_time_box" name="query_meeting_time" value="<%= @the_course.meeting_time&.strftime("%H:%M") %>">
-    </div>
+        <div class="course-form-row">
+          <label for="location_box">
+            Location
+          </label>
 
-    <div>
-      <label for="start_date_box">
-        Course Start Date
-      </label>
+          <input type="text" id="location_box" name="query_location" value="<%= @the_course.location %>">
+        </div>
 
-      <input type="date" id="start_date_box" name="query_start_date" value="<%= @the_course.start_date %>">
-    </div>
+        <div class="course-form-row">
+          <label for="meeting_time_box">
+            Meeting time
+          </label>
 
-    <div>
-      <label for="end_date_box">
-        Course End Date
-      </label>
+          <input type="time" id="meeting_time_box" name="query_meeting_time" value="<%= @the_course.meeting_time&.strftime("%H:%M") %>">
+        </div>
 
-      <input type="date" id="end_date_box" name="query_end_date" value="<%= @the_course.end_date %>">
-    </div>
+        <div class="course-form-row">
+          <label for="start_date_box">
+            Course Start Date
+          </label>
 
-    <div>
-      <label for="instructor_name_box">
-        Instructor name
-      </label>
+          <input type="date" id="start_date_box" name="query_start_date" value="<%= @the_course.start_date %>">
+        </div>
 
-      <input type="text" id="instructor_name_box" name="query_instructor_name" value="<%= @the_course.instructor_name %>">
-    </div>
+        <div class="course-form-row">
+          <label for="end_date_box">
+            Course End Date
+          </label>
 
-    <div>
-      <label for="instructor_email_box">
-        Instructor email
-      </label>
+          <input type="date" id="end_date_box" name="query_end_date" value="<%= @the_course.end_date %>">
+        </div>
 
-      <input type="text" id="instructor_email_box" name="query_instructor_email" value="<%= @the_course.instructor_email %>">
-    </div>
+        <div class="course-form-row">
+          <label for="instructor_name_box">
+            Instructor name
+          </label>
 
-    <div>
-      <label for="color_box">
-        Color
-      </label>
+          <input type="text" id="instructor_name_box" name="query_instructor_name" value="<%= @the_course.instructor_name %>">
+        </div>
 
-      <input type="color" id="color_box" name="query_color" value="<%= @the_course.color.presence || "#4F46E5" %>">
-    </div>
+        <div class="course-form-row">
+          <label for="instructor_email_box">
+            Instructor email
+          </label>
 
-    <div>
-      <label>
-        Meeting days
-      </label>
+          <input type="text" id="instructor_email_box" name="query_instructor_email" value="<%= @the_course.instructor_email %>">
+        </div>
 
-      <% selected_days = (@the_course.meeting_days || "").split(",").map(&:strip) %>
+        <div class="course-form-row">
+          <label for="color_box">
+            Color
+          </label>
 
-      <% ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
-        <div>
-          <input
-            type="checkbox"
-            id="<%= day.downcase %>_box"
-            name="query_meeting_days[]"
-            value="<%= day %>"
-            <%= "checked" if selected_days.include?(day) %>
-          >
-          <label for="<%= day.downcase %>_box"><%= day %></label>
+          <input type="color" id="color_box" name="query_color" value="<%= @the_course.color.presence || "#4F46E5" %>">
+        </div>
+
+        <div class="course-form-row">
+          <label>
+            Meeting days
+          </label>
+
+          <% selected_days = (@the_course.meeting_days || "").split(",").map(&:strip) %>
+
+          <div class="meeting-days-grid">
+            <% ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
+              <label class="meeting-day-option" for="<%= day.downcase %>_box">
+                <input
+                  type="checkbox"
+                  id="<%= day.downcase %>_box"
+                  name="query_meeting_days[]"
+                  value="<%= day %>"
+                  <%= "checked" if selected_days.include?(day) %>
+                >
+                <span><%= day %></span>
+              </label>
+            <% end %>
+          </div>
+        </div>
+
+        <button type="submit" class="course-submit-button">
+          Update course
+        </button>
+      </form>
+    </article>
+  </div>
+
+  <hr class="section-divider">
+
+  <div class="task-list-box">
+    <h2>Tasks for this course</h2>
+    <h4>
+      <a href="/tasks">Add new task</a>
+    </h4>
+
+    <div class="task-scroll-area">
+      <div class="task-header-row">
+        <div></div>
+        <div>Task</div>
+        <div>Due Date</div>
+        <div>Priority</div>
+        <div>Days Left</div>
+        <div></div>
+      </div>
+
+      <% @upcoming_tasks.each do |task| %>
+        <div class="task-row">
+          <div>
+            <form action="/mark_task_complete/<%= task.id %>" method="post">
+              <input type="hidden" name="query_completed" value="0">
+
+              <input
+                type="checkbox"
+                name="query_completed"
+                value="1"
+                class="task-checkbox"
+                <%= "checked" if task.status == "completed" %>
+                onchange="this.form.submit();"
+              >
+            </form>
+          </div>
+
+          <div class="task-info">
+            <div class="task-title">
+              <%= task.task_title %>
+            </div>
+
+            <div class="task-meta">
+              <%= task.course.name if task.course.present? %>
+            </div>
+          </div>
+
+          <div class="task-due-date">
+            <%= task.due_date.present? ? task.due_date : "—" %>
+          </div>
+
+          <div class="task-priority">
+            <% if task.priority_rank.present? %>
+              <% priority_label =
+                case task.priority_rank
+                when 1 then "High"
+                when 2 then "Medium"
+                when 3 then "Low"
+                else task.priority_rank
+                end
+              %>
+              <%= priority_label %>
+            <% else %>
+              —
+            <% end %>
+          </div>
+
+          <div class="task-days-left">
+            <% if task.due_date.present? %>
+              <% days_left = (task.due_date - Date.today).to_i + 1 %>
+              <%= days_left %>
+            <% else %>
+              —
+            <% end %>
+          </div>
+
+          <div class="task-link-cell">
+            <a href="/tasks/<%= task.id %>">Edit/View Details</a>
+          </div>
         </div>
       <% end %>
     </div>
-
-    <button type="submit">
-      Update course
-    </button>
-  </form>
-</article>
-
-<hr>
-
-<div class="task-list-box">
-  <h2>Tasks for this course</h2>
-  <h4>
-    <a href="/tasks">Add new task</a>
-  </h4>
-
-  <div class="task-scroll-area">
-    <div class="task-header-row">
-      <div></div>
-      <div>Task</div>
-      <div>Due Date</div>
-      <div>Priority</div>
-      <div>Days Left</div>
-      <div></div>
-    </div>
-
-    <% @upcoming_tasks.each do |task| %>
-      <div class="task-row">
-        <div>
-          <form action="/mark_task_complete/<%= task.id %>" method="post">
-            <input type="hidden" name="query_completed" value="0">
-
-            <input
-              type="checkbox"
-              name="query_completed"
-              value="1"
-              class="task-checkbox"
-              <%= "checked" if task.status == "completed" %>
-              onchange="this.form.submit();"
-            >
-          </form>
-        </div>
-
-        <div class="task-info">
-          <div class="task-title">
-            <%= task.task_title %>
-          </div>
-
-          <div class="task-meta">
-            <%= task.course.name if task.course.present? %>
-          </div>
-        </div>
-
-        <div class="task-due-date">
-          <%= task.due_date.present? ? task.due_date : "—" %>
-        </div>
-
-        <div class="task-priority">
-          <% if task.priority_rank.present? %>
-            <% priority_label =
-              case task.priority_rank
-              when 1 then "High"
-              when 2 then "Medium"
-              when 3 then "Low"
-              else task.priority_rank
-              end
-            %>
-            <%= priority_label %>
-          <% else %>
-            —
-          <% end %>
-        </div>
-
-        <div class="task-days-left">
-          <% if task.due_date.present? %>
-            <% days_left = (task.due_date - Date.today).to_i + 1 %>
-            <%= days_left %>
-          <% else %>
-            —
-          <% end %>
-        </div>
-
-        <div class="task-link-cell">
-          <a href="/tasks/<%= task.id %>">Edit/View Details</a>
-        </div>
-      </div>
-    <% end %>
   </div>
 </div>

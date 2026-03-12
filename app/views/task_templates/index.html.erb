@@ -1,129 +1,128 @@
-<article>
-  <header>
-    <h2>
-      Add a new task
-    </h2>
-  </header>
+<div class="tasks-page">
+  <div class="task-form-card">
+    <article>
+      <header>
+        <h2>
+          Add a new task
+        </h2>
+      </header>
 
-  <form action="/insert_task" method="post">
-    <div>
-      <label for="course_id_box">
-        Course
-      </label>
+      <form action="/insert_task" method="post" class="task-form">
+        <div class="task-form-row">
+          <label for="course_id_box">
+            Course
+          </label>
 
-      <select id="course_id_box" name="query_course_id">
-        <option value="">--No Course--</option>
+          <select id="course_id_box" name="query_course_id">
+            <option value="">-- No Course --</option>
 
-        <% Course.all.each do |course| %>
-          <option value="<%= course.id %>">
-            <%= course.name %>
-          </option>
-        <% end %>
-      </select>
+            <% Course.all.each do |course| %>
+              <option value="<%= course.id %>">
+                <%= course.name %>
+              </option>
+            <% end %>
+          </select>
+        </div>
 
-    </div>
+        <div class="task-form-row">
+          <label for="task_title_box">
+            Task Title
+          </label>
 
-    <div>
-      <label for="task_title_box">
-        Task Title
-      </label>
+          <input type="text" id="task_title_box" name="query_task_title">
+        </div>
 
-      <input type="text" id="task_title_box" name="query_task_title">
-    </div>
+        <div class="task-form-row">
+          <label for="description_box">
+            Description
+          </label>
 
-    <div>
-      <label for="description_box">
-        Description
-      </label>
+          <input type="text" id="description_box" name="query_description">
+        </div>
 
-      <input type="text" id="description_box" name="query_description">
-    </div>
+        <div class="task-form-row">
+          <label for="due_date_box">
+            Due Date
+          </label>
 
-    <div>
-      <label for="due_date_box">
-        Due Date
-      </label>
+          <input type="date" id="due_date_box" name="query_due_date">
+        </div>
 
-      <input type="date" id="due_date_box" name="query_due_date">
-    </div>
+        <div class="task-form-row">
+          <label for="due_time_box">
+            Due Time
+          </label>
 
-    <div>
-      <label for="due_time_box">
-        Due Time
-      </label>
+          <input type="time" id="due_time_box" name="query_due_time">
+        </div>
 
-      <input type="time" id="due_time_box" name="query_due_time">
-    </div>
+        <div class="task-form-row">
+          <label for="priority_rank_box">
+            Priority
+          </label>
 
-    <div>
-      <label for="priority_rank_box">
-        Priority
-      </label>
+          <select id="priority_rank_box" name="query_priority_rank">
+            <option value="1">Low</option>
+            <option value="2">Medium</option>
+            <option value="3">High</option>
+          </select>
+        </div>
 
-      <select id="priority_rank_box" name="query_priority_rank">
-        <option value="1">Low</option>
-        <option value="2">Medium</option>
-        <option value="3">High</option>
-      </select>
-    </div>
+        <div class="task-form-row">
+          <label for="exam_flag_box">
+            Exam?
+          </label>
 
-    <div>
-      <label for="exam_flag_box">
-        Exam?
-      </label>
+          <select id="exam_flag_box" name="query_exam_flag">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
 
-        <select id="exam_flag_box" name="query_exam_flag">
-          <option value="0">No</option>
-          <option value="1">Yes</option>
-        </select>
-    </div>
+        <div class="task-form-row">
+          <label for="optional_flag_box">
+            Optional Task
+          </label>
 
-    <div>
-      <label for="optional_flag_box">
-        Optional Task
-      </label>
+          <select id="optional_flag_box" name="query_optional_flag">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
 
-      <select id="optional_flag_box" name="query_optional_flag">
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+        <div class="task-form-row">
+          <label for="user_id_box">
+            User
+          </label>
 
+          <input type="text" id="user_id_box" name="query_user_id">
+        </div>
 
-    <div>
-      <label for="user_id_box">
-        User
-      </label>
+        <div class="task-form-row">
+          <label for="status_box">
+            Status
+          </label>
 
-      <input type="text" id="user_id_box" name="query_user_id">
-    </div>
+          <select id="status_box" name="query_status">
+            <option value="not_started">Not Started</option>
+            <option value="in_progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
 
-    <div>
-      <label for="status_box">
-        Status
-      </label>
+        <div class="task-form-row">
+          <label for="weight_perc_box">
+            Weight %
+          </label>
 
-      <select id="status_box" name="query_status">
-        <option value="not_started">Not Started</option>
-        <option value="in_progress">In Progress</option>
-        <option value="completed">Completed</option>
-      </select>
-    </div>
+          <input type="text" id="weight_perc_box" name="query_weight_perc" placeholder="25">
+        </div>
 
-    <div>
-      <label for="weight_perc_box">
-        Weight %
-      </label>
-
-      <input type="text" id="weight_perc_box" name="query_weight_perc" placeholder="25">
-    </div>
-
-    <button type="submit">
-      Create task
-    </button>
-  </form>
-</article>
-
-<hr>
-
+        <button type="submit" class="task-submit-button">
+          Create task
+        </button>
+      </form>
+    </article>
+  </div>
+</div>
 

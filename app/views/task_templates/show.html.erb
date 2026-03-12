@@ -1,216 +1,129 @@
-<h1>
-  Task #<%= @the_task.id %> details
-</h1>
+<div class="tasks-page">
+  <div class="task-form-card">
+    <article>
+      <header>
+        <h2>
+          Edit task
+        </h2>
+      </header>
 
-<article>
-  <div>
-    <a href="/tasks">
-      Go back
-    </a>
+      <form action="/modify_task/<%= @the_task.id %>" method="post" class="task-form">
+        <div class="task-form-row">
+          <label for="course_id_box">
+            Course
+          </label>
+
+          <select id="course_id_box" name="query_course_id">
+            <option value="">-- No Course --</option>
+
+            <% Course.all.each do |course| %>
+              <option value="<%= course.id %>" <%= "selected" if course.id == @the_task.course_id %>>
+                <%= course.name %>
+              </option>
+            <% end %>
+          </select>
+        </div>
+
+        <div class="task-form-row">
+          <label for="task_title_box">
+            Task title
+          </label>
+
+          <input type="text" id="task_title_box" name="query_task_title" value="<%= @the_task.task_title %>">
+        </div>
+
+        <div class="task-form-row">
+          <label for="description_box">
+            Description
+          </label>
+
+          <input type="text" id="description_box" name="query_description" value="<%= @the_task.description %>">
+        </div>
+
+        <div class="task-form-row">
+          <label for="due_date_box">
+            Due date
+          </label>
+
+          <input type="date" id="due_date_box" name="query_due_date" value="<%= @the_task.due_date %>">
+        </div>
+
+        <div class="task-form-row">
+          <label for="due_time_box">
+            Due time
+          </label>
+
+          <input type="time" id="due_time_box" name="query_due_time" value="<%= @the_task.due_time&.strftime("%H:%M") %>">
+        </div>
+
+        <div class="task-form-row">
+          <label for="priority_rank_box">
+            Priority
+          </label>
+
+          <select id="priority_rank_box" name="query_priority_rank">
+            <option value="1" <%= "selected" if @the_task.priority_rank == 1 %>>Low</option>
+            <option value="2" <%= "selected" if @the_task.priority_rank == 2 %>>Medium</option>
+            <option value="3" <%= "selected" if @the_task.priority_rank == 3 %>>High</option>
+          </select>
+        </div>
+
+        <div class="task-form-row">
+          <label for="exam_flag_box">
+            Exam?
+          </label>
+
+          <select id="exam_flag_box" name="query_exam_flag">
+            <option value="0" <%= "selected" if @the_task.exam_flag == 0 %>>No</option>
+            <option value="1" <%= "selected" if @the_task.exam_flag == 1 %>>Yes</option>
+          </select>
+        </div>
+
+        <div class="task-form-row">
+          <label for="optional_flag_box">
+            Optional task
+          </label>
+
+          <select id="optional_flag_box" name="query_optional_flag">
+            <option value="0" <%= "selected" if @the_task.optional_flag == 0 %>>No</option>
+            <option value="1" <%= "selected" if @the_task.optional_flag == 1 %>>Yes</option>
+          </select>
+        </div>
+
+        <div class="task-form-row">
+          <label for="status_box">
+            Status
+          </label>
+
+          <select id="status_box" name="query_status">
+            <option value="not_started" <%= "selected" if @the_task.status == "not_started" %>>Not Started</option>
+            <option value="in_progress" <%= "selected" if @the_task.status == "in_progress" %>>In Progress</option>
+            <option value="completed" <%= "selected" if @the_task.status == "completed" %>>Completed</option>
+          </select>
+        </div>
+
+        <div class="task-form-row">
+          <label for="weight_perc_box">
+            Weight %
+          </label>
+
+          <input type="text" id="weight_perc_box" name="query_weight_perc" value="<%= @the_task.weight_perc %>">
+        </div>
+
+        <div class="task-form-row">
+          <label for="user_id_box">
+            User
+          </label>
+
+          <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_task.user_id %>">
+        </div>
+
+        <button type="submit" class="task-submit-button">
+          Update task
+        </button>
+      </form>
+    </article>
   </div>
-
-  <div>
-    <a href="/delete_task/<%= @the_task.id %>">
-      Delete task
-    </a>
-  </div>
-  <dl>
-    <dt>
-      Course
-    </dt>
-    <dd>
-      <%= @the_task.course_id %>
-    </dd>
-
-    <dt>
-      Exam flag
-    </dt>
-    <dd>
-      <%= @the_task.exam_flag %>
-    </dd>
-
-    <dt>
-      Due date
-    </dt>
-    <dd>
-      <%= @the_task.due_date %>
-    </dd>
-
-    <dt>
-      Optional flag
-    </dt>
-    <dd>
-      <%= @the_task.optional_flag %>
-    </dd>
-
-    <dt>
-      Priority rank
-    </dt>
-    <dd>
-      <%= @the_task.priority_rank %>
-    </dd>
-
-    <dt>
-      User
-    </dt>
-    <dd>
-      <%= @the_task.user_id %>
-    </dd>
-
-    <dt>
-      Status
-    </dt>
-    <dd>
-      <%= @the_task.status %>
-    </dd>
-
-    <dt>
-      Description
-    </dt>
-    <dd>
-      <%= @the_task.description %>
-    </dd>
-
-    <dt>
-      Due time
-    </dt>
-    <dd>
-      <%= @the_task.due_time %>
-    </dd>
-
-    <dt>
-      Weight perc
-    </dt>
-    <dd>
-      <%= @the_task.weight_perc %>
-    </dd>
-
-    <dt>
-      Task title
-    </dt>
-    <dd>
-      <%= @the_task.task_title %>
-    </dd>
-
-    <dt>
-      Created at
-    </dt>
-    <dd>
-      <%= time_ago_in_words(@the_task.created_at) %> ago
-    </dd>
-
-    <dt>
-      Updated at
-    </dt>
-    <dd>
-      <%= time_ago_in_words(@the_task.updated_at) %> ago
-    </dd>
-  </dl>
-</article>
-
-<hr>
-
-
-<article>
-  <header>
-    <h2>
-      Edit task
-    </h2>
-  </header>
-
-  <form action="/modify_task/<%= @the_task.id %>"  method="post" >
-    <div>
-      <label for="course_id_box">
-        Course
-      </label>
-
-      <input type="text" id="course_id_box" name="query_course_id" value="<%= @the_task.course_id %>">
-    </div>
-
-    <div>
-      <label for="exam_flag_box">
-        Exam flag
-      </label>
-
-      <input type="text" id="exam_flag_box" name="query_exam_flag" value="<%= @the_task.exam_flag %>">
-    </div>
-
-    <div>
-      <label for="due_date_box">
-        Due date
-      </label>
-
-      <input type="date" id="due_date_box" name="query_due_date" value="<%= @the_task.due_date %>">
-    </div>
-
-    <div>
-      <label for="optional_flag_box">
-        Optional flag
-      </label>
-
-      <input type="text" id="optional_flag_box" name="query_optional_flag" value="<%= @the_task.optional_flag %>">
-    </div>
-
-    <div>
-      <label for="priority_rank_box">
-        Priority rank
-      </label>
-
-      <input type="text" id="priority_rank_box" name="query_priority_rank" value="<%= @the_task.priority_rank %>">
-    </div>
-
-    <div>
-      <label for="user_id_box">
-        User
-      </label>
-
-      <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_task.user_id %>">
-    </div>
-
-    <div>
-      <label for="status_box">
-        Status
-      </label>
-
-      <input type="text" id="status_box" name="query_status" value="<%= @the_task.status %>">
-    </div>
-
-    <div>
-      <label for="description_box">
-        Description
-      </label>
-
-      <input type="text" id="description_box" name="query_description" value="<%= @the_task.description %>">
-    </div>
-
-    <div>
-      <label for="due_time_box">
-        Due time
-      </label>
-
-      <input type="time" id="due_time_box" name="query_due_time" value="<%= @the_task.due_time %>">
-    </div>
-
-    <div>
-      <label for="weight_perc_box">
-        Weight perc
-      </label>
-
-      <input type="text" id="weight_perc_box" name="query_weight_perc" value="<%= @the_task.weight_perc %>">
-    </div>
-
-    <div>
-      <label for="task_title_box">
-        Task title
-      </label>
-
-      <input type="text" id="task_title_box" name="query_task_title" value="<%= @the_task.task_title %>">
-    </div>
-
-    <button type="submit">
-      Update task
-    </button>
-  </form>
-</article>
+</div>
 
 <hr>
