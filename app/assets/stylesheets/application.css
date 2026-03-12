@@ -505,3 +505,36 @@ nav a:hover {
 .task-submit-button:hover {
   background: #000;
 }
+
+
+/* Edit Task Header CSS */
+
+.task-page-header {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 20px;
+}
+
+.task-page-header h1 {
+  margin-bottom: 10px;
+}
+
+.task-page-actions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.task-page-link {
+  text-decoration: none;
+  font-weight: 600;
+  color: #222;
+}
+
+.task-page-link:hover {
+  text-decoration: underline;
+}
+
+.task-page-link.danger-link {
+  color: #b42318;
+}
