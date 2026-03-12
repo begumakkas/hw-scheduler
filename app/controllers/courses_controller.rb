@@ -9,8 +9,8 @@ class CoursesController < ApplicationController
     today = Date.today
 
     @current_courses = current_user.courses.where.not(start_date: nil, end_date: nil)
-                                 .where("start_date <= ? AND end_date >= ?", today, today)
-                                 .order(:end_date, :name)
+                             .where("end_date >= ?", today)
+                             .order(:start_date, :name)
 
     @past_courses = current_user.courses.where.not(end_date: nil)
                               .where("end_date < ?", today)
