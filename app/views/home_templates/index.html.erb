@@ -34,22 +34,57 @@
     <h2>Upcoming Tasks</h2>
 
     <div class="task-filter-bar">
+        <form action="/" method="get">
+          <label for="sort_box">Order by:</label>
+
+          <select id="sort_box" name="sort" onchange="this.form.submit();">
+            <option value="due_date" <%= "selected" if @selected_sort == "due_date" %>>
+              Earliest due date
+            </option>
+            <option value="course" <%= "selected" if @selected_sort == "course" %>>
+              Course
+            </option>
+            <option value="priority" <%= "selected" if @selected_sort == "priority" %>>
+              Priority
+            </option>
+          </select>
+
+          <label for="filter_box" style="margin-left: 16px;">Filter:</label>
+
+          <select id="filter_box" name="filter" onchange="this.form.submit();">
+            <option value="all" <%= "selected" if @selected_filter == "all" %>>
+              All tasks
+            </option>
+            <option value="exams_only" <%= "selected" if @selected_filter == "exams_only" %>>
+              Exams only
+            </option>
+            <option value="exclude_optional" <%= "selected" if @selected_filter == "exclude_optional" %>>
+              Exclude optional assignments
+            </option>
+<!--            <option value="exams_only_exclude_optional" <%#= "selected" if @selected_filter == "exams_only_exclude_optional" %>>
+              Exams only + exclude optional
+            </option>-->
+          </select>
+        </form>
+      </div>
+<!--
+    <div class="task-filter-bar">
       <form action="/" method="get">
         <label for="sort_box">Order by:</label>
 
         <select id="sort_box" name="sort" onchange="this.form.submit();">
-          <option value="due_date" <%= "selected" if @selected_sort == "due_date" %>>
+          <option value="due_date" <%#= "selected" if @selected_sort == "due_date" %>>
             Earliest due date
           </option>
-          <option value="course" <%= "selected" if @selected_sort == "course" %>>
+          <option value="course" <%#= "selected" if @selected_sort == "course" %>>
             Course
           </option>
-          <option value="priority" <%= "selected" if @selected_sort == "priority" %>>
+          <option value="priority" <%#= "selected" if @selected_sort == "priority" %>>
             Priority
           </option>
         </select>
       </form>
-    </div>
+    </div>-->
 
     <div class="task-scroll-area">
       <div class="task-header-row">
