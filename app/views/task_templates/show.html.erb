@@ -31,7 +31,7 @@
           <select id="course_id_box" name="query_course_id">
             <option value="">-- No Course --</option>
 
-            <% Course.all.each do |course| %>
+            <% current_user.courses.each do |course| %>
               <option value="<%= course.id %>" <%= "selected" if course.id == @the_task.course_id %>>
                 <%= course.name %>
               </option>
