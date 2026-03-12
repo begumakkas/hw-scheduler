@@ -24,18 +24,22 @@
 
   <body>
 
-    <nav style="padding: 12px; border-bottom: 1px solid #ccc; margin-bottom: 20px;">
-      <a href="/">Home</a> 
-      <a href="/courses">Add Courses</a> 
-      <a href="/tasks">Add Tasks</a> 
+    <nav class="main-nav">
+      <div class="nav-left">
+        <a href="/">Home</a>
+        <a href="/courses">Add Courses</a>
+        <a href="/tasks">Add Tasks</a>
+      </div>
 
-      <% if user_signed_in? %>
-        <span>Signed in as <%= current_user.email %></span>
-        <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <a href="<%= new_user_session_path %>">Sign in</a>
-        <a href="<%= new_user_registration_path %>">Sign up</a>
-      <% end %>
+      <div class="nav-right">
+        <% if user_signed_in? %>
+          <span class="nav-user">Signed in as <%= current_user.email %></span>
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-auth-button" %>
+        <% else %>
+          <a href="<%= new_user_session_path %>" class="nav-auth-link">Sign in</a>
+          <a href="<%= new_user_registration_path %>" class="nav-auth-link">Sign up</a>
+        <% end %>
+      </div>
     </nav>
 
     <% if notice.present? %>
