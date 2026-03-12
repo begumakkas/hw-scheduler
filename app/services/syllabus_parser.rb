@@ -29,6 +29,8 @@ class SyllabusParser
                   "instructor_email": string or null,
                   "meeting_days": string or null,
                   "meeting_time": string or null,
+                  "start_date": string or null,
+                  "end_date": string or null,
                   "location": string or null,
                   "policies": [
                     {
