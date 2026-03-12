@@ -1,4 +1,6 @@
 class PoliciesController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     matching_policies = Policy.all
 

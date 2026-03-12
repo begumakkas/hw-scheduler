@@ -28,7 +28,27 @@
       <a href="/">Home</a> 
       <a href="/courses">Add Courses</a> 
       <a href="/tasks">Add Tasks</a> 
+
+      <% if user_signed_in? %>
+        <span>Signed in as <%= current_user.email %></span>
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <a href="<%= new_user_session_path %>">Sign in</a>
+        <a href="<%= new_user_registration_path %>">Sign up</a>
+      <% end %>
     </nav>
+
+    <% if notice.present? %>
+      <div style="color: green">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if alert.present? %>
+      <div style="color: red">
+        <%= alert %>
+      </div>
+    <% end %>
 
     <%= yield %>
   </body>

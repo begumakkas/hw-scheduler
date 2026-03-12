@@ -1,9 +1,11 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     sort_choice = params.fetch("sort", "due_date")
 
-    base_upcoming = Task.where.not(status: "completed")
-    base_completed = Task.where(status: "completed")
+    base_upcoming = current_user.tasks.where.not(status: "completed")
+    base_completed = current_user.tasks.where(status: "completed")
 
     if sort_choice == "course"
       @upcoming_tasks = base_upcoming.left_joins(:course).order("courses.name ASC, tasks.due_date ASC, tasks.due_time ASC")

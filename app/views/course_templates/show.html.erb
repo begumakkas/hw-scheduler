@@ -27,13 +27,6 @@
           <input type="text" id="name_box" name="query_name" value="<%= @the_course.name %>">
         </div>
 
-        <div class="course-form-row">
-          <label for="user_id_box">
-            User
-          </label>
-
-          <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_course.user_id %>">
-        </div>
 
         <div class="course-form-row">
           <label for="location_box">
@@ -188,7 +181,7 @@
 
           <div class="task-days-left">
             <% if task.due_date.present? %>
-              <% days_left = (task.due_date - Date.today).to_i + 1 %>
+              <% days_left = (task.due_date - Date.today).to_i %>
               <%= days_left %>
             <% else %>
               —

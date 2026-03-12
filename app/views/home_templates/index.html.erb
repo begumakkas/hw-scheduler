@@ -4,6 +4,7 @@
     <p class="home-subtitle">Stay on top of your assignments.</p>
   </div>
 
+
   <div class="upload-card">
     <h2>Upload Syllabus</h2>
 
@@ -118,7 +119,7 @@
 
           <div class="task-days-left">
             <% if task.due_date.present? %>
-              <% days_left = (task.due_date - Date.today).to_i + 1 %>
+              <% days_left = (task.due_date - Date.today).to_i %>
               <%= days_left %>
             <% else %>
               —
@@ -195,7 +196,7 @@
 
           <div class="task-days-left">
             <% if task.due_date.present? %>
-              <% days_left = (task.due_date - Date.today).to_i + 1 %>
+              <% days_left = (task.due_date - Date.today).to_i %>
               <%= days_left %>
             <% else %>
               —

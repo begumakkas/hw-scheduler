@@ -1,6 +1,8 @@
 class SyllabisController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    matching_syllabis = Syllabi.all
+    matching_syllabis = current_user.syllabis
 
     @list_of_syllabis = matching_syllabis.order({ :created_at => :desc })
 
@@ -10,7 +12,7 @@ class SyllabisController < ApplicationController
   def show
     the_id = params.fetch("path_id")
 
-    matching_syllabis = Syllabi.where({ :id => the_id })
+    matching_syllabis = current_user.syllabis.where({ :id => the_id })
 
     @the_syllabi = matching_syllabis.at(0)
 
@@ -19,7 +21,7 @@ class SyllabisController < ApplicationController
 
   def create
     the_syllabi = Syllabi.new
-    the_syllabi.user_id = params.fetch("query_user_id")
+    the_syllabi.user = current_user
     the_syllabi.course_id = params.fetch("query_course_id")
     the_syllabi.file_name = params.fetch("query_file_name")
     the_syllabi.raw_extracted_json = params.fetch("query_raw_extracted_json")
@@ -35,9 +37,9 @@ class SyllabisController < ApplicationController
 
   def update
     the_id = params.fetch("path_id")
-    the_syllabi = Syllabi.where({ :id => the_id }).at(0)
+    the_syllabi = current_user.syllabis.where({ :id => the_id }).at(0)
 
-    the_syllabi.user_id = params.fetch("query_user_id")
+    the_syllabi.user = current_user
     the_syllabi.course_id = params.fetch("query_course_id")
     the_syllabi.file_name = params.fetch("query_file_name")
     the_syllabi.raw_extracted_json = params.fetch("query_raw_extracted_json")
@@ -53,7 +55,7 @@ class SyllabisController < ApplicationController
 
   def destroy
     the_id = params.fetch("path_id")
-    the_syllabi = Syllabi.where({ :id => the_id }).at(0)
+    the_syllabi = current_user.syllabis.where({ :id => the_id }).at(0)
 
     the_syllabi.destroy
 
@@ -68,13 +70,12 @@ class SyllabisController < ApplicationController
     )
 
     course = SyllabusImporter.call(
-      user: User.first,
+      user: current_user,
       parsed_data: parsed_data,
       file_name: uploaded_file.original_filename,
       file_url: uploaded_file.original_filename
     )
-    
-    redirect_to("/courses/#{course.id}", notice: "Syllabus uploaded successfully.")
 
+    redirect_to("/courses/#{course.id}", notice: "Syllabus uploaded successfully.")
   end
 end

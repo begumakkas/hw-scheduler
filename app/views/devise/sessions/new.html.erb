@@ -1,0 +1,41 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <h2>Sign in</h2>
+
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form" }) do |f| %>
+      <div class="auth-form-row">
+        <%= f.input :email,
+                    label_html: { class: "auth-label" },
+                    required: false,
+                    autofocus: true,
+                    input_html: { autocomplete: "email", class: "auth-input" } %>
+      </div>
+
+      <div class="auth-form-row">
+        <%= f.input :password,
+                    label_html: { class: "auth-label" },
+                    required: false,
+                    input_html: { autocomplete: "current-password", class: "auth-input" } %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="auth-checkbox-row">
+          <%= f.input :remember_me,
+                      as: :boolean,
+                      label: "Remember me",
+                      wrapper: false,
+                      input_html: { class: "auth-checkbox" },
+                      label_html: { class: "auth-checkbox-label" } %>
+        </div>
+      <% end %>
+
+      <div class="auth-form-actions">
+        <%= f.button :submit, "Log in", class: "auth-button" %>
+      </div>
+    <% end %>
+
+    <div class="auth-links">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>
