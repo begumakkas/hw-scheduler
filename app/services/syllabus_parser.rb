@@ -10,7 +10,7 @@ class SyllabusParser
       file: Pathname(file_path.to_s),
       purpose: "user_data"
     )
-
+    
     response = client.responses.create(
       model: "gpt-4o-mini",
       input: [
